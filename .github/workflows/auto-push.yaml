@@ -1,16 +1,12 @@
 name: css check screenshots
 
 on:
-  push:
+  pull_request:
     branches:
       - development
       - master
-  pull_request:
-    branches:
-      - develop
-      - master
     types:
-      - closed
+      - opened
     paths:
       - "./**"
 
@@ -20,7 +16,7 @@ jobs:
 
     env:
       blank-line: "\n\n"
-      site-name: ${{secret.NETLIFY_APP_NAME}}
+      site-name: objective-noyce-5f153b
 
     steps:
       - name: Wait for Netlify Preview Deploy Pages Check to change to neutral (complete)
@@ -36,6 +32,7 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1.3
         id: wait-for-200
         with:
+          token: ${{secrets.NETLIFY_TOKEN}}
           site_name: ${{ env.site-name }}
 
       - uses: actions/checkout@v2
@@ -47,7 +44,7 @@ jobs:
       - name: screenshots-ci-action
         uses: xxidbr9/screenshots-action@v1.1.7
         with:
-          url: ${{ format('{0}'), steps.wait-for-200.outputs.url,'/screen_1' }}
+          url: ${{ format('{0}', steps.wait-for-200.outputs.url,'/screen_1') }}
           devices: iPhone 12,iPhone 12 Pro,iPhone 12 Pro Max
 
       - name: Upload Screenshots to Imgur
