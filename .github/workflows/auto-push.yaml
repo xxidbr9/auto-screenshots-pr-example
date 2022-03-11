@@ -36,6 +36,7 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1.3
         id: wait-for-200
         with:
+          token: ${{secrets.NETLIFY_TOKEN}}
           site_name: ${{ env.site-name }}
 
       - uses: actions/checkout@v2
