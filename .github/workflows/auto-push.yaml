@@ -20,7 +20,7 @@ jobs:
 
     env:
       blank-line: "\n\n"
-      site-name: ${{secret.NETLIFY_APP_NAME}}
+      site-name: ${{secrets.NETLIFY_APP_NAME}}
 
     steps:
       - name: Wait for Netlify Preview Deploy Pages Check to change to neutral (complete)
