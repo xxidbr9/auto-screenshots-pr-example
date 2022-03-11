@@ -1,9 +1,16 @@
 name: css check screenshots
 
 on:
-  pull_request:
+  push:
     branches:
       - development
+      - master
+  pull_request:
+    branches:
+      - develop
+      - master
+    types:
+      - closed
     paths:
       - "./**"
 
