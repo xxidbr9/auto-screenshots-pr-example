@@ -1,0 +1,57 @@
+name: css check screenshots
+
+on:
+  pull_request:
+    branches:
+      - development
+    paths:
+      - "./**"
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+
+    env:
+      blank-line: "\n\n"
+      site-name: ${{secret.NETLIFY_APP_NAME}}
+
+    steps:
+      - name: Wait for Netlify Preview Deploy Pages Check to change to neutral (complete)
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-page-check
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          checkName: Pages changed - ${{ env.site-name }}
+
+      - name: Wait for Preview URL to return status 200
+        if: steps.wait-for-page-check.outputs.conclusion == 'neutral'
+        uses: jakepartusch/wait-for-netlify-action@v1.3
+        id: wait-for-200
+        with:
+          site_name: ${{ env.site-name }}
+
+      - uses: actions/checkout@v2
+      - name: install puppeteer-headful
+        uses: mujo-code/puppeteer-headful@master
+        env:
+          CI: "true"
+
+      - name: screenshots-ci-action
+        uses: xxidbr9/screenshots-action@v1.1.7
+        with:
+          url: ${{ format('{0}'), steps.wait-for-200.outputs.url,'/screen_1' }}
+          devices: iPhone 12,iPhone 12 Pro,iPhone 12 Pro Max
+
+      - name: Upload Screenshots to Imgur
+        id: upload
+        uses: devicons/public-upload-to-imgur@v2.2.1
+        with:
+          path: ./screenshots/
+          client_id: ${{secrets.IMGUR_CLIENT_ID}}
+
+      - name: Make BOT Screenshots
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: ${{ format('<details><summary>Check for Responsiveness - View the Preview Deployment at different viewport sizes</summary> {0}{1} </details>', env.blank-line, join(fromJSON(steps.upload.outputs.markdown_urls), ' ')) }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
