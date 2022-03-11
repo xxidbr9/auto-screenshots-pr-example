@@ -7,8 +7,6 @@ on:
       - master
     types:
       - opened
-    paths:
-      - "./**"
 
 jobs:
   screenshots:
