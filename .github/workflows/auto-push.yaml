@@ -39,7 +39,7 @@ jobs:
           CI: "true"
 
       - name: screenshots-ci-action
-        uses: xxidbr9/screenshots-action@v1.1.7
+        uses: xxidbr9/screenshots-action@v1.1.8
         with:
           url: ${{ format('{0}{1}', steps.wait-for-200.outputs.url, 'screen_1') }}
           devices: iPhone 12 Pro
