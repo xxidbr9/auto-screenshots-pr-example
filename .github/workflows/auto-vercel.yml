@@ -7,12 +7,9 @@ on:
       - master
     types:
       - opened
-  issue_comment:
-    types: [edited]
 
 jobs:
   check-screen:
-    # if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -34,7 +31,7 @@ jobs:
       - name: screenshots-action
         uses: xxidbr9/screenshots-action@v1.1.13
         with:
-          url: ${{ format('{0}{1}{2}', 'https://', steps.vercel_url.outputs.preview_url, ' ') }}
+          url: ${{ format('{0}{1}{2}', 'https://', steps.vercel_url.outputs.preview_url, github.head_ref) }}
           devices: iPhone 12 Pro
           noDesktop: true
 
@@ -48,5 +45,5 @@ jobs:
       - name: Make BOT Screenshots
         uses: thollander/actions-comment-pull-request@v1
         with:
-          message: ${{ format('<details><summary>Check for Responsiveness - View the Preview Deployment at different viewport sizes</summary> {0}{1} </details>', env.blank-line, join(fromJSON(steps.upload.outputs.markdown_urls), ' ')) }}
+          message: ${{ format('<details><summary>Check for Responsiveness - View the Preview Deployment at different viewport sizes</summary>{0}<img src="{1}" width="50%"/></details>', env.blank-line, join(fromJSON(steps.upload.outputs.markdown_urls), ' ')) }}
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
