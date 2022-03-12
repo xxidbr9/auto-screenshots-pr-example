@@ -28,7 +28,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          vercel_team_id: 'opstrace'
+          vercel_team_id: 'xxidbr9'
           vercel_project_id: 'test-screenshots-cicd'
           
       - name: screenshots-action
