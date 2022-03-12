@@ -24,7 +24,7 @@ jobs:
 
       - name: vercel-preview-url
         uses: xxidbr9/vercel-preview-url@v1.0.10
-        id: vercel_preview_url
+        id: vercel_url
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
@@ -32,9 +32,9 @@ jobs:
           vercel_project_id: "prj_ALLlEBuMymBLuvT5yaB1NA4XZqsj"
 
       - name: screenshots-action
-        uses: xxidbr9/screenshots-action@v1.1.11
+        uses: xxidbr9/screenshots-action@v1.1.12
         with:
-          url: ${{ format('{0}{1}', steps.vercel_preview_url.outputs.vercel_preview_url, ' ') }}
+          url: ${{ format('{0}{1}', steps.vercel_url.outputs.vercel_preview_url, ' ') }}
           devices: iPhone 12 Pro
           noDesktop: true
 
