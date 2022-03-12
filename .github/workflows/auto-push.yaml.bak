@@ -21,8 +21,8 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo "$GITHUB_CONTEXT"
-          echo ${{ github.event.pull_request.title }}
+          echo ${{ github.head_ref }}
+
 
       - name: Wait for Netlify Preview Deploy Pages Check to change to neutral (complete)
         uses: fountainhead/action-wait-for-check@v1.0.0
