@@ -1,6 +1,13 @@
-name: screenshots-ci-action Vercel
+name: Screenshots-action Vercel
 
-on: deployment_status
+on:
+  pull_request:
+    branches:
+      - development
+      - master
+    types:
+      - opened
+
 jobs:
   build:
     if: github.event.deployment_status.state == 'success'
@@ -11,11 +18,11 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo ${{ github.head_ref }}
-          
+
       - uses: aaimio/vercel-preview-url-action@v1
         id: vercel_preview_url
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: screenshots-action
         uses: xxidbr9/screenshots-action@v1.1.11
