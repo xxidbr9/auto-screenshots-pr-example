@@ -9,7 +9,7 @@ on:
       - opened
 
 jobs:
-  build:
+  check-screen:
     # if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
