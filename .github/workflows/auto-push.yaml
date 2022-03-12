@@ -43,7 +43,7 @@ jobs:
         with:
           url: ${{ format('{0}{1}', steps.wait-for-200.outputs.url, 'screen_1') }}
           devices: iPhone 12 Pro
-          noDesktop: "true"
+          noDesktop: true
 
       - name: Upload Screenshots to Imgur
         id: upload
