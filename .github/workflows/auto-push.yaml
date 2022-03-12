@@ -17,6 +17,13 @@ jobs:
       site-name: objective-noyce-5f153b
 
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          echo ${{ github.event.pull_request.title }}
+
       - name: Wait for Netlify Preview Deploy Pages Check to change to neutral (complete)
         uses: fountainhead/action-wait-for-check@v1.0.0
         id: wait-for-page-check
@@ -40,7 +47,7 @@ jobs:
           CI: "true"
 
       - name: screenshots-action
-        uses: xxidbr9/screenshots-action@v1.1.10
+        uses: xxidbr9/screenshots-action@v1.1.11
         with:
           url: ${{ format('{0}{1}', steps.wait-for-200.outputs.url, ' ') }}
           devices: iPhone 12 Pro
