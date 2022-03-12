@@ -29,7 +29,7 @@ jobs:
           vercel_project_id: "prj_ALLlEBuMymBLuvT5yaB1NA4XZqsj"
 
       - name: screenshots-action
-        uses: xxidbr9/screenshots-action@v1.1.17
+        uses: xxidbr9/screenshots-action@v1.1.18
         with:
           url: ${{ format('https://{0}/{1}', steps.vercel_url.outputs.preview_url, github.head_ref) }}
           devices: iPhone 12 Pro
