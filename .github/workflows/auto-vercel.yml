@@ -23,7 +23,7 @@ jobs:
           echo ${{ github.head_ref }}
 
       - name: vercel-preview-url
-        uses: xxidbr9/vercel-url-action@v1.0.9
+        uses: xxidbr9/vercel-preview-url@v1.0.9
         id: vercel_preview_url
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
