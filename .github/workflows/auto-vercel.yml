@@ -29,7 +29,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
           vercel_team_id: "xxidbr9"
-          vercel_project_id: "test-screenshots-cicd"
+          vercel_project_id: "prj_ALLlEBuMymBLuvT5yaB1NA4XZqsj"
 
       - name: screenshots-action
         uses: xxidbr9/screenshots-action@v1.1.11
