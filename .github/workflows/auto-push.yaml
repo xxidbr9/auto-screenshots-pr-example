@@ -30,7 +30,7 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1.3
         id: wait-for-200
         with:
-          site_name: ${{  env.site-name }}
+          site_name: ${{ env.site-name }}
 
       - uses: actions/checkout@v2
       - name: install puppeteer-headful
@@ -38,8 +38,8 @@ jobs:
         env:
           CI: "true"
 
-      - name: screenshots-ci-action
-        uses: xxidbr9/screenshots-action@v1.1.8
+      - name: screenshots-action
+        uses: xxidbr9/screenshots-action@v1.1.9
         with:
           url: ${{ format('{0}{1}', steps.wait-for-200.outputs.url, ' ') }}
           devices: iPhone 12 Pro
