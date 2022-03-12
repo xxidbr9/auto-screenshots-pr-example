@@ -34,7 +34,7 @@ jobs:
       - name: screenshots-action
         uses: xxidbr9/screenshots-action@v1.1.13
         with:
-          url: ${{ format('{0}{1}', steps.vercel_url.outputs.preview_url, ' ') }}
+          url: ${{ format('{0}{1}{2}', 'https://', steps.vercel_url.outputs.preview_url, ' ') }}
           devices: iPhone 12 Pro
           noDesktop: true
 
