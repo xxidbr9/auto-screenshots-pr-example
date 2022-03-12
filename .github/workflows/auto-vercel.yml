@@ -23,10 +23,9 @@ jobs:
           echo ${{ github.head_ref }}
 
       - name: vercel-preview-url
-        uses: zentered/vercel-preview-url@v1.0.0
+        uses: xxidbr9/vercel-url-action@v1.0.9
         id: vercel_preview_url
         env:
-          GITHUB_REF: ${{ github.head_ref }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
           vercel_team_id: "xxidbr9"
