@@ -29,7 +29,7 @@ jobs:
           vercel_project_id: "prj_ALLlEBuMymBLuvT5yaB1NA4XZqsj"
 
       - name: screenshots-action
-        uses: xxidbr9/screenshots-action@v1.1.14
+        uses: xxidbr9/screenshots-action@v1.1.15
         with:
           url: ${{ format('https://{0}/{1}', steps.vercel_url.outputs.preview_url, github.head_ref) }}
           devices: iPhone 12 Pro
@@ -46,6 +46,7 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            ${{ format('# ✨ Ini hasil slicing mu {0}{1}', env.blank-line, join(fromJSON(steps.upload.outputs.markdown_urls), ' ')) }}
+            # ✨ Ini hasil slicing mu 
+            ${{ format('{0}{1}', env.blank-line, join(fromJSON(steps.upload.outputs.markdown_urls), ' ')) }}
             ${{format('creator : @{0}', github.actor)}}
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
